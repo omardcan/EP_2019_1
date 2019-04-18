@@ -3,6 +3,7 @@
 # Alunos:
 # - aluno A: Omar Dibo Calixto Afrange Neto, omardcan@al.insper.edu.br
 # - aluno B: Elena De São Jose Santos, elenasjs@al.insper.edu.br
+import random
 
 def carregar_cenarios():
     cenarios = {
@@ -75,7 +76,11 @@ def main():
 
             # Aluno B: substitua este comentário e a linha abaixo pelo código
             # para pedir a escolha do usuário.
-            escolha = ''
+            print('')
+            for e in opcoes:
+                print(str(e)+ ": " + str(opcoes[e]))
+            escolha = input("Você decidi ir para: ")
+
 
             if escolha in opcoes:
                 nome_cenario_atual = escolha
