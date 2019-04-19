@@ -4,43 +4,23 @@
 # - aluno A: Omar Dibo Calixto Afrange Neto, omardcan@al.insper.edu.br
 # - aluno B: Elena De São Jose Santos, elenasjs@al.insper.edu.br
 import random
+import json
+
+with open("player.json", 'r') as aa:
+    player = json.loads(aa.read())
+
+with open("enemys.json", 'r') as aa:
+    enemys_dict = json.loads(aa.read())
+
+with open("treasures.txt", 'r') as aa:
+    treasures_dict = json.loads(aa.read())
+
 
 def carregar_cenarios():
-    cenarios = {
-        "inicio": {
-            "titulo": "Saguao do perigo",
-            "descricao": "Voce esta no saguao de entrada do insper",
-            "opcoes": {
-                "andar professor": "Tomar o elevador para o andar do professor",
-                "biblioteca": "Ir para a biblioteca"
-            }
-        },
-        "andar professor": {
-            "titulo": "Andar do desespero",
-            "descricao": "Voce chegou ao andar da sala do seu professor",
-            "opcoes": {
-                "inicio": "Tomar o elevador para o saguao de entrada",
-                "professor": "Falar com o professor"
-            }
-        },
-        "professor": {
-            "titulo": "O monstro do Python",
-            "descricao": "Voce foi pedir para o professor adiar o EP. "
-                         "O professor revelou que é um monstro disfarçado "
-                         "e devorou sua alma.",
-            "opcoes": {}
-        },
-        "biblioteca": {
-            "titulo": "Caverna da tranquilidade",
-            "descricao": "Voce esta na biblioteca",
-            "opcoes": {
-                "inicio": "Voltar para o saguao de entrada"
-            }
-        }
-    }
+    with open('cenarios.json', 'r') as aa:
+        cenarios = json.loads(aa.read())
     nome_cenario_atual = "inicio"
     return cenarios, nome_cenario_atual
-
 
 def main():
     print("Na hora do sufoco!")
@@ -67,26 +47,43 @@ def main():
         print('')
         print(cenario_atual['descricao'])
         print('')
+        print('')
 
-        opcoes = cenario_atual['opcoes']
-        if len(opcoes) == 0:
-            print("Acabaram-se suas opções! Mwo mwo mwooooo...")
-            game_over = True
-        else:
+        print("""
+0- Abrir o inventario
+1- Andar por ai
+""")
 
-            # Aluno B: substitua este comentário e a linha abaixo pelo código
-            # para pedir a escolha do usuário.
-            print('')
-            for e in opcoes:
-                print(str(e)+ ": " + str(opcoes[e]))
-            escolha = input("Você decidi ir para: ")
+        inv_or_mov = input("")
+        print('')
+        
+        if inv_or_mov == "0":
+            for i in player["inventario"]:
+                print(i)
 
 
-            if escolha in opcoes:
-                nome_cenario_atual = escolha
-            else:
-                print("Sua indecisão foi sua ruína!")
+
+        elif inv_or_mov == "1":
+            opcoes = cenario_atual['opcoes']
+            if len(opcoes) == 0:
+                print("Acabaram-se suas opções! Mwo mwo mwooooo...")
                 game_over = True
+            else:
+
+                # Aluno B: substitua este comentário e a linha abaixo pelo código
+                # para pedir a escolha do usuário.
+                print('')
+                for e in opcoes:
+                    print(str(e)+ ": " + str(opcoes[e]))
+                escolha = input("Você decidi ir para: ")
+                print('')
+
+
+                if escolha in opcoes:
+                    nome_cenario_atual = escolha
+                else:
+                    print("Sua indecisão foi sua ruína!")
+                    game_over = True
 
     print("Você morreu!")
 
