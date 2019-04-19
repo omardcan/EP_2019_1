@@ -1,0 +1,14 @@
+{
+    "vida": 150,
+    "arma atual": "punhos",
+    "velocidade": 10,
+    "inventario": {
+        "Dinheiro": 0,
+        "Po\u00e7\u00f5es de Vida": 0,
+        "Monsters": 0,
+        "Armas": [
+            "punhos",
+            "notebook"
+        ]
+    }
+}
