@@ -2,9 +2,9 @@
     "vida": 90,
     "arma": "punhos",
     "velocidade": 10,
-    "Dinheiro": 0,
+    "Dinheiro": 5000000,
     "inventario": {
-        "Po\u00e7\u00f5es de Vida": [
+        "po\u00e7\u00e3o de vida": [
             2
         ],
         "RedBull": [
