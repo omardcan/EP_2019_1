@@ -1,5 +1,5 @@
 {
-    "vida": 150,
+    "vida": 90,
     "arma": "punhos",
     "velocidade": 10,
     "Dinheiro": 0,
@@ -10,9 +10,9 @@
         "RedBull": [
             2
         ],
-        "Armas": [
-            "punhos",
-            "notebook"
-        ]
+        "Armas": {
+            "punho": 10,
+            "notebook": 20
+        }
     }
 }
