@@ -39,14 +39,16 @@ with open('cenarios.json', 'w') as arquivo:
 
 
 player = {}
-player["vida"] = 150
+player["vida"] = 90
 player["arma"] = "punhos"
 player["velocidade"] = 10
 player["Dinheiro"] = 0
 player["inventario"] = {}
 player["inventario"]["Poções de Vida"] = [2]
 player["inventario"]["RedBull"] = [2]
-player["inventario"]["Armas"] = ["punhos", "notebook"]
+player["inventario"]["Armas"] = {}
+player["inventario"]["Armas"]["punho"] = 10
+player["inventario"]["Armas"]["notebook"] = 20
 
 string_player = json.dumps(player, sort_keys=False, indent=4)
 with open('player.json', 'w') as arquivo:
@@ -57,13 +59,13 @@ enemys = {}
 
 enemys["professores"] = {}
 enemys["professores"]["Raul"] = {}
-enemys["professores"]["Raul"]['vida'] = 200
+enemys["professores"]["Raul"]['vida'] = 70
 enemys["professores"]["Raul"]['dano'] = 15
 enemys["professores"]["Raul"]['velocidade'] = 8
 
 enemys['alunos'] = {}
 enemys['alunos']["Duarte"] = {}
-enemys["alunos"]["Duarte"]['vida'] = 130
+enemys["alunos"]["Duarte"]['vida'] = 40
 enemys["alunos"]["Duarte"]['dano'] = 10
 enemys["alunos"]["Duarte"]['velocidade'] = 20
 
@@ -72,8 +74,16 @@ with open('enemys.json', 'w') as arquivo:
     arquivo.write(string_enemys)
 
 
-treasures = ["cartão de crédito","espada de papelão","estilete do FabLab"]
+treasures_items = ["poção de vida", "RedBull"]
 
-string_treasures = json.dumps(treasures, sort_keys=False, indent=4)
-with open('treasures.txt', 'w') as arquivo:
-    arquivo.write(string_treasures)
+string_treasures_items = json.dumps(treasures_items, sort_keys=False, indent=4)
+with open('treasures_items.json', 'w') as arquivo:
+    arquivo.write(string_treasures_items)
+
+treasures_weapons = {}
+treasures_weapons["espada de papelão"] = 17
+treasures_weapons["estilete do FabLab"] = 30
+
+string_treasures_weapons = json.dumps(treasures_weapons, sort_keys=False, indent=4)
+with open('treasures_weapons.json', 'w') as arquivo:
+    arquivo.write(string_treasures_weapons)
