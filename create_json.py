@@ -6,7 +6,8 @@ cenarios = {
         "descricao": "Voce esta no saguao de entrada do insper",
         "opcoes": {
             "andar professor": "Tomar o elevador para o andar do professor",
-            "biblioteca": "Ir para a biblioteca"
+            "biblioteca": "Ir para a biblioteca",
+            "quarto andar": "Ir para o quarto andar"
         }
     },
     "andar professor": {
@@ -14,7 +15,8 @@ cenarios = {
         "descricao": "Voce chegou ao andar da sala do seu professor",
         "opcoes": {
             "inicio": "Tomar o elevador para o saguao de entrada",
-            "professor": "Falar com o professor"
+            "professor": "Falar com o professor",
+            "quarto andar": "Ir para o quarto andar"
         }
     },
     "professor": {
@@ -33,6 +35,27 @@ cenarios = {
     }
 }
 
+
+cenarios["quarto andar"] = {}
+cenarios["quarto andar"]["titulo"] = "Casa 2.0"
+cenarios["quarto andar"]["descricao"] = "Você esta na sua nova casa"
+cenarios["quarto andar"]["opcoes"] = {}
+cenarios["quarto andar"]["opcoes"]["inicio"] = "Voltar para o saguao de entrada"
+cenarios["quarto andar"]["opcoes"]["maquina"] = "Ir comprar algo na maquina"
+cenarios["quarto andar"]["opcoes"]["andar professor"] = "Tomar o elevador para o andar do professor"
+
+cenarios["maquina"] = {}
+cenarios["maquina"]["titulo"] = "Maquina de Comida/Bebida"
+cenarios["maquina"]["descricao"] = "Não sei por que você decidiu ir comprar algo, sendo q seu ep ta uma merda ainda, mas já que estamos aqui..."
+cenarios["maquina"]["opcoes"] = {}
+cenarios["maquina"]["opcoes"]["sair"] = "Você para de olhar a maquina"
+
+
+
+
+
+
+
 string_cenarios = json.dumps(cenarios, sort_keys=False, indent=4)
 with open('cenarios.json', 'w') as arquivo:
     arquivo.write(string_cenarios)
@@ -42,9 +65,9 @@ player = {}
 player["vida"] = 90
 player["arma"] = "punhos"
 player["velocidade"] = 10
-player["Dinheiro"] = 0
+player["Dinheiro"] = 100
 player["inventario"] = {}
-player["inventario"]["Poções de Vida"] = [2]
+player["inventario"]["poção de vida"] = [2]
 player["inventario"]["RedBull"] = [2]
 player["inventario"]["Armas"] = {}
 player["inventario"]["Armas"]["punho"] = 10
@@ -87,3 +110,22 @@ treasures_weapons["estilete do FabLab"] = 30
 string_treasures_weapons = json.dumps(treasures_weapons, sort_keys=False, indent=4)
 with open('treasures_weapons.json', 'w') as arquivo:
     arquivo.write(string_treasures_weapons)
+
+
+store = {}
+store["RedBull"] = {}
+store["RedBull"]["preco"] = 10
+store["RedBull"]["quantidade"] = 5
+
+store["poção de vida"] = {}
+store["poção de vida"]["preco"] = 20
+store["poção de vida"]["quantidade"] = 5
+
+store["??????"] = {}
+store["??????"]["preco"] = 500
+store["??????"]["quantidade"] = 5
+store["??????"]["dano"] = 120
+
+string_store = json.dumps(store, sort_keys=False, indent=4)
+with open('store.json', 'w') as arquivo:
+    arquivo.write(string_store)
