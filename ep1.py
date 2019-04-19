@@ -18,6 +18,9 @@ with open("treasures_items.json", 'r') as aa:
 with open("treasures_weapons.json", 'r') as aa:
     treasures_weapons_dict = json.loads(aa.read())
 
+with open("store.json", 'r') as aa:
+    store = json.loads(aa.read())
+
 def carregar_cenarios():
     with open('cenarios.json', 'r') as aa:
         cenarios = json.loads(aa.read())
@@ -98,10 +101,10 @@ def main():
             print('')
 
             if opcao == "1":
-                if player["inventario"]["Poções de Vida"][0] == 0:
+                if player["inventario"]["poção de vida"][0] == 0:
                     print("Tu não tem poção animal")
                 else:
-                    player["inventario"]["Poções de Vida"][0] -= 1
+                    player["inventario"]["poção de vida"][0] -= 1
                     print("Vida: " + str(player["vida"]) + "+" + str(cura))
                     player["vida"] += cura
                     print("Vida: " + str(player["vida"]))
@@ -117,24 +120,25 @@ def main():
                     player["velocidade"] += speed_buff
 
             elif opcao == "3":
-                a = 0
                 for i in player["inventario"]["Armas"]:
-                    print(str(a) +"- " + str(i))
-                    a += 1
-                escolha_arma = int(input("?: "))
-                player["arma"] = player["inventario"]["Armas"][escolha_arma]
+                    print("- " + str(i))
+                escolha_arma = (input("?: "))
+                if escolha_arma not in player["inventario"]["Armas"]:
+                      escolha_arma = (input("digita certo animal: "))
+                player["arma"] = escolha_arma
 
             else:
                 print("Sua indecisão foi sua ruína!")
                 game_over = True
-
             print('')
 
 
         elif inv_or_mov == "1":
             chance_enemy = random.randint(0,100)
-            if chance_enemy <= 100:
+            if chance_enemy <= 20:
                 combate = True
+                vezes_player = 1
+                vezes_enemy = 1
                 tipo_enemy = random.randint(0, len(enemys_dict["professores"]) + len(enemys_dict["alunos"])-1)
                 if tipo_enemy < len(enemys_dict["professores"]):
                     enemy = enemys_dict["professores"]
@@ -150,35 +154,51 @@ def main():
                 else:
                     vez_player = False
 
+
+                if 2*player["velocidade"] <= enemy[nome]["velocidade"]:
+                    vezes_enemy = 2
+
                 print(menu_combate)
                 opcao = input("?: ")
                 while combate:
+                    if player["velocidade"] >= 2*enemy[nome]["velocidade"]:
+                        vezes_player = 2
+
                     if player["vida"] <= 0:
                         print("Você morreu que nem o perdedor que é")
                         combate = False
                         game_over = True
 
                     if vez_player:
-                        vez_player = False
+                        if vezes_player == 1:
+                            vez_player = False
+                        else:
+                            vezes_player -= 1
 
                         if opcao == "0":
-                            print('Ufa, dessa vez foi por pouco')
-                            combate = False
+                            if player["velocidade"] > enemy[nome]["velocidade"]:
+                                print('Ufa, dessa vez foi por pouco')
+                                combate = False
+                            else:
+                                print(nome + " é mais rapido do que você pensava")
 
                         if opcao == "1":
-                            enemy[nome]["vida"] -= 10
+                            arma_player = player["arma"]
+                            enemy[nome]["vida"] -= player["inventario"]["Armas"][arma_player]
 
                         if enemy[nome]["vida"] <= 0:
                             combate = False
                             consumivel_or_arma = random.randint(0,2)
                             if consumivel_or_arma <= 1:
-                                print('l')
                                 loot = treasures_items_list[random.randint(0,len(treasures_items_list)-1)]
                             else:
-                                print('h')
-                                loot = random.choice(list(treasures_weapons_dict.items()))
-                            print(loot)
-                            print("No corpo morto do " + nome + " você encontra: " + loot)
+                                loot = random.choice(list(treasures_weapons_dict.items()))[0]
+
+                            money = random.randint(5,20)
+                            player["Dinheiro"] += money
+
+
+                            print("No corpo morto do " + nome + " você encontra: " + loot + " e " + str(money) + "$")
                             if loot == "poção de vida":
                                 player["inventario"]['poção de vida'][0] += 1
                             elif loot == "RedBull":
@@ -188,11 +208,11 @@ def main():
                                 player["inventario"]["Armas"][loot] = treasures_weapons_dict[loot]
 
                         if opcao == "2":
-                            if player["inventario"]["Poções de Vida"][0] == 0:
+                            if player["inventario"]["poção de vida"][0] == 0:
                                 print("Tu não tem poção animal")
                             else:
-                                player["inventario"]["Poções de Vida"][0] -= 1
-                                print("Vida: " + str(player["vida"]) + "+30")
+                                player["inventario"]["poção de vida"][0] -= 1
+                                print("Vida: " + str(player["vida"]) + "+" + str(cura))
                                 player["vida"] += cura
                                 print("Vida: " + str(player["vida"]))
 
@@ -211,7 +231,10 @@ def main():
                             opcao = input("?: ")
 
                     else:
-                        vez_player = True
+                        if vezes_enemy == 1:
+                            vez_player = True
+                        else:
+                            vezes_enemy -= 1
                         player["vida"] -= enemy[nome]["dano"]
                         print("Vida: " + str(player["vida"]))
                     print('')
@@ -222,6 +245,7 @@ def main():
                 if len(opcoes) == 0:
                     print("Acabaram-se suas opções! Mwo mwo mwooooo...")
                     game_over = True
+
                 else:
 
                     print('')
@@ -230,12 +254,37 @@ def main():
                     escolha = input("?: ")
                     print('')
 
-
                     if escolha in opcoes:
                         nome_cenario_atual = escolha
                     else:
                         print("Sua indecisão foi sua ruína!")
                         game_over = True
+
+                    if escolha == "maquina":
+                        compras = True
+                        while compras:
+                            print("Dinheiro: " + str(player["Dinheiro"]))
+                            print('')
+                            for key, value in store.items():
+                                print("- " + str(key) + ": " + str(value["preco"]) + "$")
+                            opcao = input("?: ")
+                            if opcao not in store:
+                                compras = False
+                            else:
+                                if player["Dinheiro"] >= store[opcao]["preco"] and store[opcao]["quantidade"] > 0:
+                                    player["Dinheiro"] -= store[opcao]["preco"]
+                                    store[opcao]["quantidade"] -= 1
+
+                                    if opcao == "poção de vida":
+                                        player["inventario"]['poção de vida'][0] += 1
+
+                                    elif opcao == "RedBull":
+                                        player["inventario"]['RedBull'][0] += 1
+
+                                    else:
+                                        player["inventario"]["Armas"][opcao] = store[opcao]["dano"]
+                                else:
+                                    print("Acabou esse item na maquina")
         else:
             print("Sua indecisão foi sua ruína!")
             game_over = True
