@@ -4,7 +4,8 @@
         "descricao": "Voce esta no saguao de entrada do insper",
         "opcoes": {
             "andar professor": "Tomar o elevador para o andar do professor",
-            "biblioteca": "Ir para a biblioteca"
+            "biblioteca": "Ir para a biblioteca",
+            "quarto andar": "Ir para o quarto andar"
         }
     },
     "andar professor": {
@@ -12,7 +13,8 @@
         "descricao": "Voce chegou ao andar da sala do seu professor",
         "opcoes": {
             "inicio": "Tomar o elevador para o saguao de entrada",
-            "professor": "Falar com o professor"
+            "professor": "Falar com o professor",
+            "quarto andar": "Ir para o quarto andar"
         }
     },
     "professor": {
@@ -25,6 +27,22 @@
         "descricao": "Voce esta na biblioteca",
         "opcoes": {
             "inicio": "Voltar para o saguao de entrada"
+        }
+    },
+    "quarto andar": {
+        "titulo": "Casa 2.0",
+        "descricao": "Voc\u00ea esta na sua nova casa",
+        "opcoes": {
+            "inicio": "Voltar para o saguao de entrada",
+            "maquina": "Ir comprar algo na maquina",
+            "andar professor": "Tomar o elevador para o andar do professor"
+        }
+    },
+    "maquina": {
+        "titulo": "Maquina de Comida/Bebida",
+        "descricao": "N\u00e3o sei por que voc\u00ea decidiu ir comprar algo, sendo q seu ep ta uma merda ainda, mas j\u00e1 que estamos aqui...",
+        "opcoes": {
+            "sair": "Voc\u00ea para de olhar a maquina"
         }
     }
 }
