@@ -1,5 +1,6 @@
 [
-    "cart\u00e3o de cr\u00e9dito",
     "espada de papel\u00e3o",
-    "estilete do FabLab"
+    "estilete do FabLab",
+    "po\u00e7\u00e3o de vida",
+    "RedBull"
 ]
