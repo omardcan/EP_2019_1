@@ -1,14 +1,14 @@
 {
     "professores": {
         "Raul": {
-            "vida": 200,
+            "vida": 70,
             "dano": 15,
             "velocidade": 8
         }
     },
     "alunos": {
         "Duarte": {
-            "vida": 130,
+            "vida": 40,
             "dano": 10,
             "velocidade": 20
         }
