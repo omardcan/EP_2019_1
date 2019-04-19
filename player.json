@@ -1,11 +1,15 @@
 {
     "vida": 150,
-    "arma atual": "punhos",
+    "arma": "punhos",
     "velocidade": 10,
+    "Dinheiro": 0,
     "inventario": {
-        "Dinheiro": 0,
-        "Po\u00e7\u00f5es de Vida": 0,
-        "Monsters": 0,
+        "Po\u00e7\u00f5es de Vida": [
+            2
+        ],
+        "RedBull": [
+            2
+        ],
         "Armas": [
             "punhos",
             "notebook"

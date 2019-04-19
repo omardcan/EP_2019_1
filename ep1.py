@@ -40,8 +40,7 @@ def main():
     while not game_over:
         cenario_atual = cenarios[nome_cenario_atual]
 
-        # Aluno A: substitua este comentário pelo código para imprimir
-        # o cenário atual.
+        print('-'*len(cenario_atual['titulo']))
         print(cenario_atual["titulo"])
         print('-'*len(cenario_atual['titulo']))
         print('')
@@ -54,13 +53,61 @@ def main():
 1- Andar por ai
 """)
 
-        inv_or_mov = input("")
+        inv_or_mov = input("?: ")
         print('')
-        
-        if inv_or_mov == "0":
-            for i in player["inventario"]:
-                print(i)
 
+        if inv_or_mov == "0":
+            print("Vida: " + str(player["vida"]))
+            print("Dinheiro: " + str(player["Dinheiro"]))
+            print("Arma: " + str(player["arma"]))
+            print('')
+            print("0- Voltar")
+
+            a = 1
+            for i in player["inventario"]:
+                if len(player["inventario"][i]) == 1:
+                    print(str(a) + "- " + str(i) + ": " + str(player["inventario"][i][0]))
+                else:
+                    print(str(a) + "- " + str(i) + ": ")
+                    for e in player["inventario"][i]:
+                        print("    -" + str(e))
+                a += 1
+            print('')
+            opcao = input("?: ")
+            print('')
+
+            if opcao == "1":
+                if player["inventario"]["Poções de Vida"][0] == 0:
+                    print("Tu não tem poção animal")
+                else:
+                    player["inventario"]["Poções de Vida"][0] -= 1
+                    print("Vida: " + str(player["vida"]) + "+30")
+                    player["vida"] += 30
+                    print("Vida: " + str(player["vida"]))
+
+            elif opcao == "2":
+                if player["inventario"]["RedBull"][0] == 0:
+                    print("Tu n tem RedBull animal")
+                else:
+                    player["inventario"]["RedBull"][0] -= 1
+                    print("Tu ta no pique, mas quanto tempo durará?")
+                    speed_buff = random.randint(5,10)
+                    speed_buff_timer = random.randint(1,10)
+                    player["velocidade"] += speed_buff
+
+            elif opcao == "3":
+                a = 0
+                for i in player["inventario"]["Armas"]:
+                    print(str(a) +"- " + str(i))
+                    a += 1
+                escolha_arma = int(input("?: "))
+                player["arma"] = player["inventario"]["Armas"][escolha_arma]
+
+            else:
+                print("Sua indecisão foi sua ruína!")
+                game_over = True
+
+            print('')
 
 
         elif inv_or_mov == "1":
@@ -70,12 +117,10 @@ def main():
                 game_over = True
             else:
 
-                # Aluno B: substitua este comentário e a linha abaixo pelo código
-                # para pedir a escolha do usuário.
                 print('')
                 for e in opcoes:
                     print(str(e)+ ": " + str(opcoes[e]))
-                escolha = input("Você decidi ir para: ")
+                escolha = input("?: ")
                 print('')
 
 
@@ -84,6 +129,9 @@ def main():
                 else:
                     print("Sua indecisão foi sua ruína!")
                     game_over = True
+        else:
+            print("Sua indecisão foi sua ruína!")
+            game_over = True
 
     print("Você morreu!")
 

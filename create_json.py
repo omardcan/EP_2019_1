@@ -40,12 +40,12 @@ with open('cenarios.json', 'w') as arquivo:
 
 player = {}
 player["vida"] = 150
-player["arma atual"] = "punhos"
+player["arma"] = "punhos"
 player["velocidade"] = 10
+player["Dinheiro"] = 0
 player["inventario"] = {}
-player["inventario"]["Dinheiro"] = 0
-player["inventario"]["Poções de Vida"] = 0
-player["inventario"]["Monsters"] = 0
+player["inventario"]["Poções de Vida"] = [2]
+player["inventario"]["RedBull"] = [2]
 player["inventario"]["Armas"] = ["punhos", "notebook"]
 
 string_player = json.dumps(player, sort_keys=False, indent=4)
